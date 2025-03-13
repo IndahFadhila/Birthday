@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun!</title>
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Backsound untuk setiap halaman -->
+    <audio id="backsound1" src="/assets/backsound1.mp3" loop></audio>
+    <audio id="backsound2" src="/assets/backsound2.mp3" loop></audio>
+    <audio id="backsound3" src="/assets/backsound3.mp3" loop></audio>
+    <audio id="backsound4" src="/assets/backsound4.mp3" loop></audio>
+    <audio id="backsound5" src="/assets/backsound5.mp3" loop></audio>
+
+    <!-- Halaman 1 -->
+    <div id="halaman1" class="halaman">
+        <div class="container">
+            <h1>Heyyo whatsupp<br> Selamat Ulang Tahun!<br>🎂🥳🤓</h1>
+            <button onclick="keHalaman2()">Ayo Klik Tombol Ini</button>
+        </div>
+    </div>
+
+    <!-- Halaman 2 -->
+    <div id="halaman2" class="halaman hidden">
+        <div class="container">
+            <h1>Masukkan Data Anda</h1>
+            <form onsubmit="return keHalaman3(event)">
+                <input type="text" id="nama" placeholder="Nama" required>
+                <input type="date" id="tanggalLahir" required>
+                <input type="text" id="citaCita" placeholder="Cita-Cita" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Halaman 3 -->
+    <div id="halaman3" class="halaman hidden">
+        <div class="container">
+            <h1 id="ucapan"></h1>
+            <button onclick="keHalaman4()">Next</button>
+        </div>
+    </div>
+
+    <!-- Halaman 4: Pilih Foto -->
+    <div id="halaman4" class="halaman hidden">
+        <div class="container">
+            <h1>Pilih Foto Favoritmu</h1>
+            <div class="foto-container">
+                <div class="foto" onclick="pilihFoto('foto1', 'Ini adalah foto pertama, penuh dengan makna kebahagiaan.')">
+                    <img src="/assets/foto1.jpg" alt="Foto 1">
+                </div>
+                <div class="foto" onclick="pilihFoto('foto2', 'Ini adalah foto kedua, menggambarkan semangat dan energi.')">
+                    <img src="/assets/foto2.jpg" alt="Foto 2">
+                </div>
+                <div class="foto" onclick="pilihFoto('foto3', 'Ini adalah foto ketiga, penuh dengan kedamaian dan ketenangan.')">
+                    <img src="/assets/foto3.jpg" alt="Foto 3">
+                </div>
+                <div class="foto" onclick="pilihFoto('foto4', 'Ini adalah foto keempat, melambangkan keberanian dan tekad.')">
+                    <img src="/assets/foto4.jpg" alt="Foto 4">
+                </div>
+            </div>
+            <div id="penjelasanFoto" class="hidden">
+                <p id="teksPenjelasan"></p>
+                <button onclick="keHalaman5()">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Halaman 5: Tiup Lilin -->
+    <div id="halaman5" class="halaman hidden">
+        <div class="container">
+            <div class="kue">
+                <div class="lilin">
+                    <div id="api" class="api"></div>
+                    <div class="batang-lilin"></div>
+                </div>
+            </div>
+            <p>Pencet tombolnya santai aja bro</p>
+            <button onclick="tiupLilin()">Ayo Tap Tombol Ini untuk Meniup Lilin</button>
+            <div id="popup" class="hidden">
+                <h2>Selamat Ulang Tahun</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Halaman 6: Kredit -->
+    <div id="halaman6" class="halaman hidden">
+        <div class="container">
+            <h1>Ini we em</h1>
+            <p>Credit by ROXYINN🥶😏</p>
+        </div>
+    </div>
+
+    <!-- Audio untuk efek suara -->
+    <audio id="tiupAudio" src="/assets/Mouth Blow Whoosh Sound Effect.mp3"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
