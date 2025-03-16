@@ -10,18 +10,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Backsound untuk setiap halaman -->
-    <audio id="backsound1" src="/assets/backsound1.mp3" loop></audio>
-    <audio id="backsound2" src="/assets/backsound2.mp3" loop></audio>
-    <audio id="backsound3" src="/assets/backsound3.mp3" loop></audio>
-    <audio id="backsound4" src="/assets/backsound4.mp3" loop></audio>
-    <audio id="backsound5" src="/assets/backsound5.mp3" loop></audio>
 
     <!-- Halaman 1 -->
     <div id="halaman1" class="halaman">
         <div class="container">
             <h1>Heyyo whatsupp<br> Selamat Ulang Tahun!<br>🎂🥳🤓</h1>
-            <button onclick="keHalaman2()">Ayo Klik Tombol Ini</button>
+            <button onclick="mulaiBacksound(); keHalaman2()">Ayo Klik Tombol Ini</button>
         </div>
     </div>
 
@@ -32,7 +26,7 @@
             <form onsubmit="return keHalaman3(event)">
                 <input type="text" id="nama" placeholder="Nama" required>
                 <input type="date" id="tanggalLahir" required>
-                <input type="text" id="citaCita" placeholder="Cita-Cita" required>
+                <input type="text" id="citaCita" placeholder="Cita-Cita atau Harapan" required>
                 <button type="submit">Submit</button>
             </form>
         </div>
@@ -46,33 +40,8 @@
         </div>
     </div>
 
-    <!-- Halaman 4: Pilih Foto -->
+    <!-- Halaman 4: Tiup Lilin -->
     <div id="halaman4" class="halaman hidden">
-        <div class="container">
-            <h1>Pilih Foto Favoritmu</h1>
-            <div class="foto-container">
-                <div class="foto" onclick="pilihFoto('foto1', 'Ini adalah foto pertama, penuh dengan makna kebahagiaan.')">
-                    <img src="/assets/foto1.jpg" alt="Foto 1">
-                </div>
-                <div class="foto" onclick="pilihFoto('foto2', 'Ini adalah foto kedua, menggambarkan semangat dan energi.')">
-                    <img src="/assets/foto2.jpg" alt="Foto 2">
-                </div>
-                <div class="foto" onclick="pilihFoto('foto3', 'Ini adalah foto ketiga, penuh dengan kedamaian dan ketenangan.')">
-                    <img src="/assets/foto3.jpg" alt="Foto 3">
-                </div>
-                <div class="foto" onclick="pilihFoto('foto4', 'Ini adalah foto keempat, melambangkan keberanian dan tekad.')">
-                    <img src="/assets/foto4.jpg" alt="Foto 4">
-                </div>
-            </div>
-            <div id="penjelasanFoto" class="hidden">
-                <p id="teksPenjelasan"></p>
-                <button onclick="keHalaman5()">Next</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Halaman 5: Tiup Lilin -->
-    <div id="halaman5" class="halaman hidden">
         <div class="container">
             <div class="kue">
                 <div class="lilin">
@@ -88,16 +57,22 @@
         </div>
     </div>
 
-    <!-- Halaman 6: Kredit -->
-    <div id="halaman6" class="halaman hidden">
+    <!-- Halaman 5: Kredit -->
+    <div id="halaman5" class="halaman hidden">
         <div class="container">
             <h1>Ini we em</h1>
             <p>Credit by ROXYINN🥶😏</p>
+            <button onclick="keHalaman1()">Back</button>
         </div>
     </div>
 
-    <!-- Audio untuk efek suara -->
-    <audio id="tiupAudio" src="/assets/Mouth Blow Whoosh Sound Effect.mp3"></audio>
+    <!-- Audio untuk backsound -->
+    <div class="audio-container">
+        <audio id="backsound" src="assets/Payphone.mp3" loop></audio>
+    </div>
+
+    <!-- Audio untuk efek suara tiup lilin -->
+    <audio id="tiupAudio" src="assets/fartmeme.mp3"></audio>
 
     <script src="script.js"></script>
 </body>

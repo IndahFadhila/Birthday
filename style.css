@@ -12,7 +12,6 @@ body {
 }
 
 .halaman {
-    font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -26,25 +25,22 @@ body {
 }
 
 .container {
-    font-family: 'Poppins', sans-serif;
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     max-width: 400px;
-    width: 90%; 
-    margin: 0 auto; 
+    width: 90%;
+    margin: 0 auto;
 }
 
 h1 {
-    font-family: 'Poppins', sans-serif;
     font-size: 2rem;
     color: #333;
     margin-bottom: 20px;
 }
 
 button {
-    font-family: 'Poppins', sans-serif;
     background: #6a1b9a;
     color: white;
     border: none;
@@ -53,7 +49,7 @@ button {
     cursor: pointer;
     font-size: 1rem;
     margin-top: 20px;
-    width: 100%; 
+    width: 100%;
 }
 
 button:hover {
@@ -61,62 +57,13 @@ button:hover {
 }
 
 input {
-    font-family: 'Poppins', sans-serif;
-    width: 100%; 
+    width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
     box-sizing: border-box;
-}
-
-.kartu {
-    width: 200px;
-    height: 300px;
-    position: relative;
-    perspective: 1000px;
-    margin: 0 auto;
-    cursor: pointer;
-}
-
-.kartu-depan, .kartu-belakang {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    backface-visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.6s;
-}
-
-.kartu-depan {
-    background: #6a1b9a;
-    color: white;
-    font-size: 1.2rem;
-}
-
-.kartu-belakang {
-    background: white;
-    color: #333;
-    font-size: 1.5rem;
-    transform: rotateY(180deg);
-}
-
-.kartu.terbalik .kartu-depan {
-    transform: rotateY(180deg);
-}
-
-.kartu.terbalik .kartu-belakang {
-    transform: rotateY(0deg);
-}
-
-.kartu.zoom {
-    transform: scale(2);
-    transition: transform 1s;
 }
 
 /* Kue dan Lilin */
@@ -168,48 +115,14 @@ input {
     display: none;
 }
 
-/* Halaman Pilih Foto */
-.foto-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
+.audio-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
 }
 
-.foto {
-    width: 100px;
-    height: 100px;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.foto img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-#penjelasanFoto {
-    margin-top: 20px;
-}
-
-/* Responsive Design */
-@media (max-width: 480px) {
-    .container {
-        width: 95%;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
-
-    button {
-        font-size: 0.9rem;
-    }
-
-    input {
-        font-size: 0.9rem;
-    }
+.audio-container audio {
+    width: 300px; 
 }
