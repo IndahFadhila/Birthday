@@ -4,75 +4,441 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selamat Ulang Tahun!</title>
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Dancing+Script:wght@500;600;700&family=Fredoka:wght@500;600;700&family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Halaman 1 -->
-    <div id="halaman1" class="halaman">
-        <div class="container">
-            <h1>Heyyo whatsupp<br> Selamat Ulang Tahun!<br>🎂🥳🤓</h1>
-            <button onclick="mulaiBacksound(); keHalaman2()">Ayo Klik Tombol Ini</button>
-        </div>
+    <!-- Background dekorasi rainbow -->
+    <div class="bg-decor" aria-hidden="true">
+        <div class="balloon bl1"></div>
+        <div class="balloon bl2"></div>
+        <div class="balloon bl3"></div>
+        <div class="balloon bl4"></div>
+        <div class="balloon bl5"></div>
+        <div class="balloon bl6"></div>
+        <div class="balloon bl7"></div>
+
+        <span class="bg-emoji be1">🎉</span>
+        <span class="bg-emoji be2">🎂</span>
+        <span class="bg-emoji be3">🥳</span>
+        <span class="bg-emoji be4">🎁</span>
+        <span class="bg-emoji be5">🎈</span>
+        <span class="bg-emoji be6">🎊</span>
+
+        <div class="sparkle s1"></div>
+        <div class="sparkle s2"></div>
+        <div class="sparkle s3"></div>
+        <div class="sparkle s4"></div>
+        <div class="sparkle s5"></div>
+        <div class="sparkle s6"></div>
+        <div class="sparkle s7"></div>
+        <div class="sparkle s8"></div>
     </div>
 
-    <!-- Halaman 2 -->
-    <div id="halaman2" class="halaman hidden">
+    <!-- Top controls -->
+    <button id="backBtn" class="ctrl-btn back-btn" onclick="kembali()" title="Kembali" style="display:none">
+        <span class="back-arrow">←</span>
+    </button>
+    <div class="top-controls">
+        <button id="langToggle" class="ctrl-btn" title="Language">
+            <span id="langLabel">ID</span>
+        </button>
+        <button id="musicToggle" class="ctrl-btn" title="Music">
+            <span class="music-icon">🎵</span>
+        </button>
+    </div>
+
+    <!-- Halaman 1: Welcome -->
+    <section id="halaman1" class="halaman aktif">
+        <div class="container welcome">
+            <h1 class="welcome-title" data-i18n="welcome_title">Happy Birthday</h1>
+            <div class="thin-divider"></div>
+            <p class="welcome-sub" data-i18n="welcome_sub">tap tombol untuk buka kejutannya</p>
+            <button class="btn primary" onclick="keHalaman(2)">
+                <span data-i18n="welcome_btn">Buka</span> <span class="arrow">→</span>
+            </button>
+            <p class="welcome-from">
+                <span data-i18n="welcome_from">dari</span>
+                <b id="signName0">Indah Fadhila</b>
+            </p>
+        </div>
+    </section>
+
+    <!-- Halaman 2: Form -->
+    <section id="halaman2" class="halaman">
         <div class="container">
-            <h1>Masukkan Data Anda</h1>
-            <form onsubmit="return keHalaman3(event)">
-                <input type="text" id="nama" placeholder="Nama" required>
-                <input type="date" id="tanggalLahir" required>
-                <input type="text" id="citaCita" placeholder="Cita-Cita atau Harapan" required>
-                <button type="submit">Submit</button>
+            <h2 class="judul" data-i18n="form_title">Kenalan dulu yuk</h2>
+            <p class="sub" data-i18n="form_sub">Isi data biar aku bisa kasih ucapan yang pas</p>
+            <form onsubmit="return submitForm(event)" class="form">
+                <label class="field">
+                    <span data-i18n="form_nama">Nama kamu</span>
+                    <input type="text" id="nama"
+                        data-i18n-placeholder="form_nama_ph" placeholder="Contoh: Rani" required>
+                </label>
+                <label class="field">
+                    <span data-i18n="form_tgl">Tanggal lahir</span>
+                    <input type="date" id="tanggalLahir" required>
+                </label>
+                <label class="field">
+                    <span data-i18n="form_cita">Cita-cita atau harapan</span>
+                    <input type="text" id="citaCita"
+                        data-i18n-placeholder="form_cita_ph" placeholder="Dokter, keliling dunia..." required>
+                </label>
+                <button type="submit" class="btn primary">
+                    <span data-i18n="form_btn">Lanjut</span> <span class="arrow">→</span>
+                </button>
             </form>
         </div>
-    </div>
+    </section>
 
-    <!-- Halaman 3 -->
-    <div id="halaman3" class="halaman hidden">
-        <div class="container">
-            <h1 id="ucapan"></h1>
-            <button onclick="keHalaman4()">Next</button>
-        </div>
-    </div>
-
-    <!-- Halaman 4: Tiup Lilin -->
-    <div id="halaman4" class="halaman hidden">
-        <div class="container">
-            <div class="kue">
-                <div class="lilin">
-                    <div id="api" class="api"></div>
-                    <div class="batang-lilin"></div>
+    <!-- Halaman 3: 3D Flip Card Ucapan -->
+    <section id="halaman3" class="halaman">
+        <div class="container flip-page">
+            <p class="sub" data-i18n="flip_hint">Tap kartunya untuk buka</p>
+            <div class="flip-card" id="flipCard" onclick="flipUcapan()">
+                <div class="flip-inner">
+                    <div class="flip-face flip-front">
+                        <div class="envelope-flap"></div>
+                        <div class="envelope-body">
+                            <div class="wax-seal">
+                                <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+                                    <circle cx="16" cy="16" r="14"/>
+                                    <path d="M9 12 h14 v9 h-14 z M9 12 l7 6 l7 -6" fill="none" stroke="white" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <p class="untuk" data-i18n="flip_untuk">Untuk</p>
+                            <h3 class="nama-penerima" id="namaPenerimaFlip">-</h3>
+                            <p class="tap-hint" data-i18n="flip_tap">tap</p>
+                        </div>
+                    </div>
+                    <div class="flip-face flip-back">
+                        <h3 class="judul-script" id="ucapanNama">Selamat Ulang Tahun!</h3>
+                        <p class="ucapan-body" id="ucapanBody"></p>
+                        <p class="signature">— <span id="signName1">Indah Fadhila</span></p>
+                    </div>
                 </div>
             </div>
-            <p>Pencet tombolnya santai aja bro</p>
-            <button onclick="tiupLilin()">Ayo Tap Tombol Ini untuk Meniup Lilin</button>
-            <div id="popup" class="hidden">
-                <h2>Selamat Ulang Tahun</h2>
+            <button class="btn primary" onclick="keHalaman(4)">
+                <span data-i18n="next">Lanjut</span> <span class="arrow">→</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Halaman 4: Fun Facts + Zodiak -->
+    <section id="halaman4" class="halaman">
+        <div class="container fun-page">
+            <h2 class="judul" data-i18n="fun_title">Tahukah kamu?</h2>
+            <p class="sub" data-i18n="fun_sub">Fakta unik tentang kamu</p>
+
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="statHari">0</div>
+                    <div class="stat-label" data-i18n="stat_hari">Hari sudah kamu jalani</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statJam">0</div>
+                    <div class="stat-label" data-i18n="stat_jam">Jam kamu hidup</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statDetak">0</div>
+                    <div class="stat-label" data-i18n="stat_detak">Detak jantung (kira-kira)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statNafas">0</div>
+                    <div class="stat-label" data-i18n="stat_nafas">Kali kamu bernafas</div>
+                </div>
+            </div>
+
+            <div class="zodiak-card">
+                <div class="zodiak-symbol" id="zodiakSymbol"></div>
+                <div class="zodiak-info">
+                    <div class="zodiak-label" data-i18n="zodiak_label">Zodiak kamu</div>
+                    <div class="zodiak-nama" id="zodiakNama">-</div>
+                    <div class="zodiak-desc" id="zodiakDesc">-</div>
+                </div>
+            </div>
+
+            <button class="btn primary" onclick="keHalaman(5)">
+                <span data-i18n="next">Lanjut</span> <span class="arrow">→</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Halaman 5: Photo Card -->
+    <section id="halaman5" class="halaman">
+        <div class="container photo-page">
+            <h2 class="judul" data-i18n="photo_title">Bikin Kartu Foto</h2>
+            <p class="sub" data-i18n="photo_sub">Pilih foto lucumu, kartunya bisa langsung didownload</p>
+
+            <div class="choice-row" id="choiceRow">
+                <button class="choice-btn" onclick="document.getElementById('fotoInput').click()">
+                    <svg class="choice-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 14h16v-3l-4.5-4.5L11 15l-2.5-2.5L4 17v1Zm4.5-7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+                    </svg>
+                    <span data-i18n="photo_upload">Upload Foto</span>
+                </button>
+                <button class="choice-btn" onclick="bukaKamera()">
+                    <svg class="choice-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M9 3h6l2 3h4a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3Zm3 6a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 2.4a2.6 2.6 0 1 1 0 5.2 2.6 2.6 0 0 1 0-5.2Z"/>
+                    </svg>
+                    <span data-i18n="photo_camera">Ambil Foto</span>
+                </button>
+            </div>
+            <input type="file" id="fotoInput" accept="image/*" hidden multiple>
+
+            <div class="card-preview-wrap" id="cardPreviewWrap">
+                <canvas id="cardCanvas" class="card-preview"></canvas>
+                <div class="slide-controls" id="slideControls">
+                    <button class="slide-btn" onclick="slidePrev()" title="Prev">‹</button>
+                    <span class="slide-counter"><span id="slideIdx">1</span>/<span id="slideTotal">1</span></span>
+                    <button class="slide-btn" onclick="slideNext()" title="Next">›</button>
+                </div>
+            </div>
+
+            <div class="card-controls" id="cardControls">
+                <div class="picker-row">
+                    <span class="picker-label" data-i18n="pick_design">Desain</span>
+                    <div class="picker-opts">
+                        <button class="design-opt active" data-design="polaroid">Polaroid</button>
+                        <button class="design-opt" data-design="ribbon">Ribbon</button>
+                        <button class="design-opt" data-design="minimal">Minimal</button>
+                    </div>
+                </div>
+                <div class="picker-row">
+                    <span class="picker-label" data-i18n="pick_color">Warna</span>
+                    <div class="picker-opts colors">
+                        <button class="color-opt active" data-color="blush"    style="background:linear-gradient(135deg,#fef1ec,#f5dfe6)"></button>
+                        <button class="color-opt" data-color="lavender" style="background:linear-gradient(135deg,#f0eaf5,#e6d5f0)"></button>
+                        <button class="color-opt" data-color="peach"    style="background:linear-gradient(135deg,#fff0e6,#ffdcc4)"></button>
+                        <button class="color-opt" data-color="mint"     style="background:linear-gradient(135deg,#e6f5ee,#c8e8d5)"></button>
+                        <button class="color-opt" data-color="sky"      style="background:linear-gradient(135deg,#e6f0f8,#c4d9ea)"></button>
+                        <button class="color-opt" data-color="cream"    style="background:linear-gradient(135deg,#fdf5e6,#f5e6c4)"></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-grid" id="photoActions">
+                <button class="btn primary small" id="downloadBtn" onclick="downloadKartu()" disabled>
+                    <svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M11 3h2v10h3.5L12 18.5 7.5 13H11V3ZM4 20h16v2H4v-2Z"/>
+                    </svg>
+                    <span data-i18n="photo_download">Download</span>
+                </button>
+                <button class="btn primary small" id="shareBtn" onclick="shareWA()">
+                    <svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M2.5 3.5 21.5 12l-19 8.5L5 12 2.5 3.5Zm2 2.4L6 12l-1.5 5.9L18 12 4.5 5.9Z"/>
+                    </svg>
+                    <span data-i18n="photo_share">Share</span>
+                </button>
+                <button class="btn ghost small" onclick="tambahFoto()">
+                    <svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M10.5 4h3v6.5H20v3h-6.5V20h-3v-6.5H4v-3h6.5V4Z"/>
+                    </svg>
+                    <span data-i18n="photo_add">Tambah</span>
+                </button>
+                <button class="btn ghost small" onclick="resetFoto()">
+                    <svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H4a8 8 0 1 0 8-7Z"/>
+                    </svg>
+                    <span data-i18n="photo_reset">Reset</span>
+                </button>
+            </div>
+
+            <button class="btn ghost next-btn" onclick="keHalaman(6)">
+                <span data-i18n="photo_next">Lanjut ke Moments</span> <span class="arrow">→</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Halaman 6: Moments Together -->
+    <section id="halaman6" class="halaman">
+        <div class="container moments-page">
+            <h2 class="judul" data-i18n="mom_title">Moments Bareng</h2>
+            <p class="sub" data-i18n="mom_sub">Upload foto-foto bareng, jadi slideshow yang bisa didownload video</p>
+
+            <button class="choice-btn full-width" onclick="document.getElementById('momentsInput').click()">
+                <svg class="choice-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 14h16v-3l-4.5-4.5L11 15l-2.5-2.5L4 17v1Zm4.5-7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+                </svg>
+                <span data-i18n="mom_upload">Pilih Foto Bareng</span>
+            </button>
+            <input type="file" id="momentsInput" accept="image/*" hidden multiple>
+
+            <div class="moments-preview" id="momentsPreview">
+                <canvas id="momentsCanvas"></canvas>
+                <div class="moment-thumbs" id="momentThumbs"></div>
+            </div>
+
+            <div class="action-grid" id="momentActions">
+                <button class="btn primary small" id="playSlideBtn" onclick="toggleSlideshow()">
+                    <svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M6 4 L20 12 L6 20 Z"/>
+                    </svg>
+                    <span data-i18n="mom_play">Play</span>
+                </button>
+                <button class="btn primary small" id="downloadVideoBtn" onclick="downloadVideo()">
+                    <svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M11 3h2v10h3.5L12 18.5 7.5 13H11V3ZM4 20h16v2H4v-2Z"/>
+                    </svg>
+                    <span data-i18n="mom_download">Video</span>
+                </button>
+            </div>
+
+            <button class="btn ghost next-btn" onclick="keHalaman(7)">
+                <span data-i18n="mom_next">Lanjut ke Wishes</span> <span class="arrow">→</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Halaman 7: Wishes Wall -->
+    <section id="halaman7" class="halaman">
+        <div class="container wishes-page">
+            <h2 class="judul" data-i18n="wish_title">Wishes Wall</h2>
+            <p class="sub" data-i18n="wish_sub">Tulis harapan tahun ini, disimpan dan bisa kamu baca lagi tahun depan</p>
+
+            <div class="wish-input">
+                <textarea id="wishText" data-i18n-placeholder="wish_placeholder"
+                    placeholder="Tahun ini aku pengen..." rows="3" maxlength="280"></textarea>
+                <button class="btn primary small" onclick="simpanWish()">
+                    <span data-i18n="wish_save">Simpan</span>
+                </button>
+            </div>
+
+            <div class="wish-list" id="wishList"></div>
+            <p class="wish-empty" id="wishEmpty" data-i18n="wish_empty">
+                Belum ada wish tersimpan. Yuk tulis yang pertama!
+            </p>
+
+            <button class="btn ghost next-btn" onclick="keHalaman(8)">
+                <span data-i18n="wish_next">Lanjut Tiup Lilin</span> <span class="arrow">→</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Halaman 8: Tiup Lilin -->
+    <section id="halaman8" class="halaman">
+        <div class="container cake-card">
+            <h2 class="judul" data-i18n="cake_title">Ayo tiup lilinnya</h2>
+            <p class="sub hint">
+                <span data-i18n="cake_hint">Tap tombol</span>
+                <span id="sisaLilin">3</span>x
+                <span data-i18n="cake_hint2">untuk padamkan semua lilin</span>
+            </p>
+
+            <div class="cake-wrap">
+                <div class="cake">
+                    <div class="lilin-row">
+                        <div class="lilin" data-lilin="1">
+                            <div class="api"></div>
+                            <div class="batang"></div>
+                        </div>
+                        <div class="lilin" data-lilin="2">
+                            <div class="api"></div>
+                            <div class="batang"></div>
+                        </div>
+                        <div class="lilin" data-lilin="3">
+                            <div class="api"></div>
+                            <div class="batang"></div>
+                        </div>
+                    </div>
+                    <div class="tingkat atas">
+                        <div class="drip"></div>
+                        <div class="cherry c1"></div>
+                        <div class="cherry c2"></div>
+                    </div>
+                    <div class="tingkat bawah">
+                        <div class="drip"></div>
+                        <div class="hias"></div>
+                    </div>
+                    <div class="piring"></div>
+                </div>
+            </div>
+
+            <button id="tiupBtn" class="btn primary" onclick="tiupLilin()">
+                <span data-i18n="cake_btn">Tiup</span>
+            </button>
+
+            <div id="popup" class="popup">
+                <svg class="ic-big bounce" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 2 L14 9 L21 10 L15.5 14.5 L17.5 22 L12 17.5 L6.5 22 L8.5 14.5 L3 10 L10 9 Z"/>
+                </svg>
+                <h2 class="judul-script" data-i18n="cake_wish">Yeay, make a wish!</h2>
+                <p class="sub" data-i18n="cake_wish_sub">Semoga semua harapanmu terkabul</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Halaman 9: Credit + Countdown -->
+    <section id="halaman9" class="halaman">
+        <div class="container credit-card">
+            <svg class="ic-big" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2 L13.5 8.5 L20 10 L13.5 11.5 L12 18 L10.5 11.5 L4 10 L10.5 8.5 Z M18 15 L18.6 17.4 L21 18 L18.6 18.6 L18 21 L17.4 18.6 L15 18 L17.4 17.4 Z M6 4 L6.4 5.6 L8 6 L6.4 6.4 L6 8 L5.6 6.4 L4 6 L5.6 5.6 Z"/>
+            </svg>
+            <h2 class="judul-script" data-i18n="credit_title">Sekian dari aku</h2>
+            <p class="ucapan-body" data-i18n="credit_body">
+                Semoga hari ini penuh tawa, coklat, dan hal-hal yang bikin kamu senyum sepanjang tahun.
+            </p>
+
+            <div class="countdown-box">
+                <p class="countdown-label" data-i18n="countdown_label">Ultah kamu berikutnya dalam:</p>
+                <div class="countdown-grid">
+                    <div class="cd-cell"><div class="cd-num" id="cdDay">0</div><div class="cd-lbl" data-i18n="cd_day">hari</div></div>
+                    <div class="cd-cell"><div class="cd-num" id="cdHour">0</div><div class="cd-lbl" data-i18n="cd_hour">jam</div></div>
+                    <div class="cd-cell"><div class="cd-num" id="cdMin">0</div><div class="cd-lbl" data-i18n="cd_min">menit</div></div>
+                    <div class="cd-cell"><div class="cd-num" id="cdSec">0</div><div class="cd-lbl" data-i18n="cd_sec">detik</div></div>
+                </div>
+            </div>
+
+            <p class="credit-tag">
+                <span data-i18n="credit_made">Dibuat dengan</span>
+                <span class="ic-heart" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6C19 16.5 12 21 12 21Z"/></svg>
+                </span>
+                <span data-i18n="credit_by">oleh</span>
+                <b id="signName2">Indah Fadhila</b>
+            </p>
+
+            <div class="action-row">
+                <button class="btn primary small" onclick="shareWA()">
+                    <svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M2.5 3.5 21.5 12l-19 8.5L5 12 2.5 3.5Zm2 2.4L6 12l-1.5 5.9L18 12 4.5 5.9Z"/>
+                    </svg>
+                    <span data-i18n="credit_share">Share ke WA</span>
+                </button>
+                <button class="btn ghost small" onclick="keHalaman(1)">
+                    <span class="arrow rev">←</span> <span data-i18n="credit_restart">Ulangi</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Camera modal -->
+    <div id="cameraModal" class="modal">
+        <div class="modal-inner">
+            <video id="cameraVideo" autoplay playsinline></video>
+            <div class="modal-actions">
+                <button class="btn ghost small" onclick="tutupKamera()">
+                    <span data-i18n="cam_cancel">Batal</span>
+                </button>
+                <button class="btn primary small" onclick="ambilFoto()">
+                    <svg class="btn-ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M9 3h6l2 3h4a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3Zm3 6a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 2.4a2.6 2.6 0 1 1 0 5.2 2.6 2.6 0 0 1 0-5.2Z"/>
+                    </svg>
+                    <span data-i18n="cam_snap">Jepret</span>
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Halaman 5: Kredit -->
-    <div id="halaman5" class="halaman hidden">
-        <div class="container">
-            <h1>Ini we em</h1>
-            <p>Credit by ROXYINN🥶😏</p>
-            <button onclick="keHalaman1()">Back</button>
-        </div>
-    </div>
+    <!-- Confetti overlay -->
+    <canvas id="confetti" class="confetti"></canvas>
 
-    <!-- Audio untuk backsound -->
-    <div class="audio-container">
-        <audio id="backsound" src="assets/Payphone.mp3" loop></audio>
-    </div>
-
-    <!-- Audio untuk efek suara tiup lilin -->
-    <audio id="tiupAudio" src="assets/fartmeme.mp3"></audio>
+    <!-- Audio -->
+    <audio id="backsound" src="assets/Payphone.mp3" loop preload="auto"></audio>
+    <audio id="tiupAudio" src="assets/tiup.mp3" preload="auto"></audio>
 
     <script src="script.js"></script>
 </body>
