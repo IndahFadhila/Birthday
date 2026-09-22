@@ -1,3 +1,9 @@
+/*!
+ * Birthday Greeting Site
+ * Copyright (c) 2026 Indah Fadhila (ROXYINN). All rights reserved.
+ * Unauthorized copying or redistribution is prohibited.
+ */
+
 // ================================================================
 // KONFIG — edit sesuai kebutuhan
 // ================================================================
@@ -269,6 +275,8 @@ function terjemahkan() {
     $('#signName0').textContent = KONFIG.pengirim;
     $('#signName1').textContent = KONFIG.pengirim;
     $('#signName2').textContent = KONFIG.pengirim;
+    const signName3 = $('#signName3');
+    if (signName3) signName3.textContent = KONFIG.pengirim;
 
     if (dataUser.nama) {
         $('#namaPenerimaFlip').textContent = dataUser.nama;
@@ -1450,3 +1458,7 @@ function animasiConfetti() {
 setMusicUI(false);
 updateSisaLilin();
 terjemahkan();
+
+// Copyright badge — tahun otomatis
+const copyYearEl = $('#copyYear');
+if (copyYearEl) copyYearEl.textContent = new Date().getFullYear();

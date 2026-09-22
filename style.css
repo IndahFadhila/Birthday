@@ -1,3 +1,9 @@
+/*!
+ * Birthday Greeting Site
+ * Copyright (c) 2026 Indah Fadhila (ROXYINN). All rights reserved.
+ * Unauthorized copying or redistribution is prohibited.
+ */
+
 /* ========== Reset & base ========== */
 * { box-sizing: border-box; }
 
@@ -1314,6 +1320,42 @@ input:focus, textarea:focus {
     margin-top: 12px;
 }
 .modal-actions .btn { flex: 1; margin-top: 0; }
+
+/* ========== Copyright badge ========== */
+.copyright-badge {
+    position: fixed;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: rgba(61, 35, 64, 0.55);
+    background: rgba(255,255,255,0.6);
+    padding: 5px 12px 5px 10px;
+    border-radius: 999px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.6);
+    letter-spacing: 0.3px;
+    z-index: 90;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+}
+.copyright-badge svg {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    opacity: 0.75;
+}
+.copyright-badge #signName3 {
+    color: var(--rose);
+    font-weight: 600;
+}
 
 /* ========== Confetti ========== */
 .confetti {
